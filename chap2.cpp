@@ -58,6 +58,13 @@ class AVL{
 
         return y;
     }
+
+    node* minvaluenode(node* root){
+        node* current = root;
+        while(current->left != NULL) current = current->left;
+        return current;
+    }
+    
     public:
     AVL(){
         root = NULL;
@@ -87,6 +94,29 @@ class AVL{
             display_preorder(root->left);
             display_preorder(root->right);
         }
+    }
+
+    node* deletion(node* root, int key){
+        if(root==NULL) return root;
+        if(key < root->data) root->left = deletion(root->left, key);
+        else if(key > root->data) root->right = deletion(root->right, key);
+        else{
+            if(root->left == NULL){
+                node* temp = root->right;
+                delete root;
+                return temp;
+            }
+            else if(root->right == NULL){
+                node* temp = root->left;
+                delete root;
+                return temp;
+            }
+
+            node* temp = minvaluenode(root->right);
+            root->data = temp->data;
+            root->right = deletion(root->right, temp->data);
+        }
+        return root;
     }
 };
 
