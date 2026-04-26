@@ -15,8 +15,7 @@ class node{
 class BST{
 
     node* root;
-    BST(){root = NULL;}
-
+    
     node* search_node(node* root, int value){
         if(!root || root->data == value) return root;
         else{
@@ -30,7 +29,7 @@ class BST{
     }
 
     public:
-
+    BST(){root = NULL;}
     node* insert_node(node* root, int value){
         if(root==NULL){
             return new node(value);
@@ -95,5 +94,10 @@ class BST{
     int subtree_sum(node* root, int key){
         node* target = search_node(root, key);
         return sum_node(target);
+    }
+
+    node* deletion(node* root, int value){
+        if(root == NULL) return root;
+        
     }
 };
